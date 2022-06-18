@@ -1,7 +1,10 @@
 #include <iostream>
 #include <SDL.h>
+#include <Game.hpp>
 
-int main() {
-    std::cout << "stuff" << std::endl;
-    return 0;
+int main(int argc, char* args[]) {
+    Game game;
+    game.start();
+
+    return EXIT_SUCCESS;
 }
