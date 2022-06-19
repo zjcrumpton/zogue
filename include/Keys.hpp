@@ -5,10 +5,10 @@
 // Engine specific key event names to be mapped to native/SDL input events
 // so that input can be interacted with at a higher level
 typedef enum {
-    QUIT
+    QUIT = 1
 } Key;
 
 // Engine specific keys mapped to SDL events
-std::unordered_map<Key, SDL_EventType> keymap = {
-    {Key::QUIT, SDL_QUIT}
+std::unordered_map<int, Key> keymap = {
+    {SDL_QUIT, Key::QUIT}
 };

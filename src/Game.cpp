@@ -1,5 +1,7 @@
 #include <Game.hpp>
+#include <SDL.h>
 #include <iostream>
+#include <Keys.hpp>
 
 const char* TILESHEET_PATH = "assets/zogue.bmp";
 
@@ -17,15 +19,8 @@ Game::~Game() {
 }
 
 void Game::start() {
-    // temp code to keep the window open
-    bool isquit = false;
-    SDL_Event event;
-    while (!isquit) { 
-        if (SDL_PollEvent( & event)) {
-            if (event.type == SDL_QUIT) {
-            isquit = true;
-            }
-        }
+    while (_continue) { 
+        handleInput();
     }
 };
 
@@ -37,3 +32,19 @@ void Game::loadTileset() {
         throw new std::runtime_error("Unable to load image!");
     }
 }
+
+void Game::quit() {
+    _continue = false;
+};
+
+void Game::handleInput() {
+    SDL_Event event;
+    if (SDL_PollEvent(&event)) {
+        Key gameKey = keymap[SDL_EventType(event.type)];
+        switch (gameKey) {
+            case Key::QUIT:
+                quit();
+                break;
+        }
+    }
+};
