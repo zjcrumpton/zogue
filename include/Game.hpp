@@ -1,5 +1,7 @@
 #pragma once
 #include <Display.hpp>
+#include <Keys.hpp>
+#include <unordered_map>
 #include <SDL.h>
 
 class Game {
