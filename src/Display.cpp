@@ -2,7 +2,9 @@
 #include <Display.hpp>
 #include <Platform.hpp>
 
-Display::Display() {
+Display::Display(SDL_Surface* tileset) {
+    _tileset = tileset;
+
     // init SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not initialize! SDL_Error: %s\n" << SDL_GetError()  << std::endl;
@@ -27,3 +29,12 @@ Display::~Display() {
     //Quit SDL subsystems
     SDL_Quit();
 }
+
+void Display::updateWindow() {
+    SDL_UpdateWindowSurface(_window);
+}
+
+void Display::draw() {
+    SDL_BlitSurface(_tileset, NULL, _screenSurface, NULL);
+    updateWindow();
+};

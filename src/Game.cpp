@@ -1,12 +1,19 @@
 #include <Game.hpp>
 #include <iostream>
 
+const char* TILESHEET_PATH = "assets/zogue.bmp";
+
 Game::Game() {
-    _display = new Display();
+    loadTileset();
+    _display = new Display(_tileset);
+    _display->draw();
 };
 
 Game::~Game() {
     delete _display;
+    //Deallocate surface
+    SDL_FreeSurface(_tileset);
+    _tileset = NULL;
 }
 
 void Game::start() {
@@ -21,3 +28,12 @@ void Game::start() {
         }
     }
 };
+
+// load the tileset once and pass it around to be sliced instead of reloading
+void Game::loadTileset() {
+    _tileset = SDL_LoadBMP(TILESHEET_PATH);
+    if (_tileset == NULL) {
+        std::cout << "Unable to load image %s! SDL Error: %s\n" << TILESHEET_PATH << SDL_GetError() << std::endl;
+        throw new std::runtime_error("Unable to load image!");
+    }
+}
