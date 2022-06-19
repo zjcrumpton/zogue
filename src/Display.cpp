@@ -1,10 +1,9 @@
 #include <iostream>
 #include <Display.hpp>
+#include <SDL.h>
 #include <Platform.hpp>
 
-Display::Display(SDL_Surface* tileset) {
-    _tileset = tileset;
-
+Display::Display(char* tilesheetPath) {
     // init SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not initialize! SDL_Error: %s\n" << SDL_GetError()  << std::endl;
@@ -19,6 +18,12 @@ Display::Display(SDL_Surface* tileset) {
             //Update the surface
             SDL_UpdateWindowSurface(_window);
         }
+    }
+
+    _tileset = SDL_LoadBMP(tilesheetPath);
+    if (_tileset == NULL) {
+        std::cout << "Unable to load image %s! SDL Error: %s\n" << tilesheetPath << SDL_GetError() << std::endl;
+        throw new std::runtime_error("Unable to load image!");
     }
 
     // convert tileset bits

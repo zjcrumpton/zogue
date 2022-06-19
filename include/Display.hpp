@@ -3,7 +3,7 @@
 
 class Display {
     public:
-        Display(SDL_Surface* tileset);
+        Display(char* tilesheetPath);
         ~Display();
         // wrapper for SDL update window func
         void updateWindow();

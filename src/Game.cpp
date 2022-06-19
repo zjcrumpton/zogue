@@ -5,13 +5,8 @@
 
 const char* TILESHEET_PATH = "assets/zogue.bmp";
 
-void reportKeyPress(Key key) {
-    std::cout << "KEY PRESSED: " << key << std::endl;
-};
-
 Game::Game() {
-    loadTileset();
-    _display = new Display(_tileset);
+    _display = new Display((char*)TILESHEET_PATH);
     _display->draw();
 };
 
@@ -25,15 +20,6 @@ Game::~Game() {
 void Game::start() {
     while (_continue) { 
         handleInput();
-    }
-};
-
-// load the tileset once and pass it around to be sliced instead of reloading
-void Game::loadTileset() {
-    _tileset = SDL_LoadBMP(TILESHEET_PATH);
-    if (_tileset == NULL) {
-        std::cout << "Unable to load image %s! SDL Error: %s\n" << TILESHEET_PATH << SDL_GetError() << std::endl;
-        throw new std::runtime_error("Unable to load image!");
     }
 };
 

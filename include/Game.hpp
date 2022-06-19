@@ -15,7 +15,6 @@ class Game {
         SDL_Surface* _tileset = NULL;
         bool _continue = true;
 
-        void loadTileset();
         // respond to input events
         void handleInput();
         void quit();
