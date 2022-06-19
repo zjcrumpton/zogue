@@ -10,6 +10,9 @@ class Display {
         // temp draw func
         void draw();
 
+        // getters
+        SDL_Surface* tileset();
+
     private:
         SDL_Window* _window = NULL;
         SDL_Surface* _screenSurface = NULL;

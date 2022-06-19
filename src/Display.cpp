@@ -50,3 +50,7 @@ void Display::draw() {
     SDL_BlitSurface(_tileset, NULL, _screenSurface, NULL);
     updateWindow();
 };
+
+SDL_Surface* Display::tileset() {
+    return _tileset;
+};
