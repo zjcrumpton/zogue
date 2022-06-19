@@ -20,6 +20,13 @@ Display::Display(SDL_Surface* tileset) {
             SDL_UpdateWindowSurface(_window);
         }
     }
+
+    // convert tileset bits
+    _tileset = SDL_ConvertSurface(_tileset, _screenSurface->format, 0 );
+    if (_tileset == NULL) {
+        std::cout << "Unable to optimize tilesheet %s! SDL Error: %s\n" << SDL_GetError() << std::endl;
+        throw new std::runtime_error("Unable to optimize image!");
+    }
 };
 
 Display::~Display() {

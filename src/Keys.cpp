@@ -1,7 +1,7 @@
 #include <Keys.hpp>
 #include <unordered_map>
 
-extern std::unordered_map<int, Key> keymap = {
+std::unordered_map<int, Key> keymap = {
     {SDLK_UP, Key::UP},
     {SDLK_w, Key::UP},
     {SDLK_DOWN, Key::DOWN},
